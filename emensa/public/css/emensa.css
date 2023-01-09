@@ -1,0 +1,144 @@
+*{
+    font-family: cursive;
+}
+table {
+    width: 100%;
+}
+td > sup{
+    color:  red;
+}
+.grid-oben{
+    display: grid;
+    margin-top: 40px;
+    padding-bottom: 10px;
+    grid-gap: 5px;
+    grid-template-columns: 15% 60%;
+}
+
+a{
+    padding: 6px;
+
+    color: #6bd3ec;
+}
+ul.nav{
+    position: relative;
+    top: 5px;
+}
+.border{
+    border: 1px solid black;
+
+}
+div p{
+    word-wrap: break-word;
+    text-align: justify;
+    margin: 5px;
+    font-size: 13px;
+}
+
+.nav > li{
+    display: inline-block;
+    list-style-type: none;
+
+}
+.frame{
+    padding: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 90%;
+}
+.center{
+    text-align: center;
+}
+
+.grid-main{
+    display: grid;
+    grid-gap: 20px;
+    grid-template-rows: auto auto auto auto auto auto;
+    justify-items: center;
+    position: relative;
+    right: 4.5%;
+
+
+}
+.grid-main-element{
+    width: 60%;
+}
+
+#zahlen{
+    display: grid;
+    grid-template-columns: auto auto auto;
+
+}
+#zahlen > h1{
+    grid-column: 1 / 4;
+}
+
+
+.logo > img{
+    position: relative;
+    top: 5px;
+}
+
+table, th, td {
+    border: 1px solid gray;
+    border-collapse: collapse;
+}
+#zahlen >h3{
+    text-align: center;
+}
+
+form{
+    position: relative;
+
+}
+#kontakt_form > label{
+position: absolute;
+bottom: 50px;
+color: gray;
+}
+#submit{
+    position: absolute;
+    right: 30px;
+    width: auto;
+    font-size: 15px;
+    background-color: white;
+    border-radius: 20px;
+    text-align: left;
+}
+input:not(.check){
+    width: 115px;
+    margin-right: 10px;
+}
+select{
+    width: 170px;
+
+}
+#wichtig>ul{
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+
+}
+
+footer li{
+    display: inline-block;
+    padding: 10px;
+
+}
+footer ul{
+    text-align: center;
+
+}
+
+footer > ul > li + li {
+    border-left: 1px solid gray;
+}
+.grid-main-element > img {
+    width: 100%;
+    height: auto;
+}
+.error{
+
+    color: #D8000C;
+
+}
