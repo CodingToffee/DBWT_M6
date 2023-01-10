@@ -25,5 +25,6 @@ return array(
     '/home' => 'HomeController@home',
     '/anmeldung' => 'HomeController@anmeldung',
     '/verifizierung' => 'HomeController@verifizierung',
-    '/bewertung' => 'HomeController@bewertung'
+    '/bewertung' => 'HomeController@bewertung',
+    '/bewertung_verarbeitung' => 'HomeController@bewertung_verarbeitung'
 );

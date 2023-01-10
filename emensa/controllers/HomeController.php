@@ -3,6 +3,7 @@ require_once($_SERVER['DOCUMENT_ROOT'].'/../models/gericht.php');
 require_once($_SERVER['DOCUMENT_ROOT'].'/../models/zahlen.php');
 require_once($_SERVER['DOCUMENT_ROOT'].'/../models/newsletter.php');
 require_once($_SERVER['DOCUMENT_ROOT'].'/../models/authentification.php');
+require_once($_SERVER['DOCUMENT_ROOT'].'/../models/bewertung.php');
 
 /* Datei: controllers/HomeController.php */
 class HomeController
@@ -106,6 +107,7 @@ class HomeController
         if ( $data != null) {
             $_SESSION['login_ok'] = true;
             $_SESSION['cookie'] = $data["name"];
+            $_SESSION['benutzer_id'] = $data['id'];
             $target = $_SESSION['target'];
             header('Location: ' . $target);
         } else {
@@ -123,6 +125,36 @@ class HomeController
         }
         else {
             return view('emensa.bewertung');
+        }
+    }
+
+    function bewertung_verarbeitung(RequestData $rd) {
+        $bemerkung = $rd->query['bemerkung'];
+        $sternebewertung = $rd->query['sternebewertung'];
+        echo $_SESSION['benutzer_id'];
+        if (strlen($bemerkung) < 5) {
+            $_SESSION['error_message'] =
+                'Die Bemerkung muss mindestens 5 Zeichen lang sein.';
+            header('Location: /bewertung');
+        }
+        else {
+            safe_bewertung($sternebewertung,$bemerkung,$_SESSION['benutzer_id']);
+            $gerichte = zufaellige_gerichte();
+            $allerge_codes = codes_from_zufaellige_gerichte($gerichte);
+
+            $zahlen_gerichte = db_zahlen_gerichte();
+            $zahlen_anmeldungen = db_zahlen_anmeldungen();
+            $zahlen_besucher = db_zahlen_besucher();
+
+
+            return view('emensa.index', [
+                'rd' => $rd,
+                'gerichte' => $gerichte,
+                'allerge_codes' => $allerge_codes,
+                'zahlen_gerichte' => $zahlen_gerichte,
+                'zahlen_anmeldungen' => $zahlen_anmeldungen,
+                'zahlen_besucher' => $zahlen_besucher
+            ]);
         }
     }
 

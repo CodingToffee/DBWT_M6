@@ -6,19 +6,19 @@
 
 @section('main')
     <grid class="grid-main-element">
-        <form method="post" action="/verifizierung">
+        <form method="post" action="/bewertung_verarbeitung">
             <label>Sternebewertung</label>
-            <select name="Sternebewertung" id="Sternebewertung">
-                <option value="sehr_gut">Sehr gut</option>
+            <select name="sternebewertung" id="sternebewertung">
+                <option value="sehr gut">Sehr gut</option>
                 <option value="gut">gut</option>
                 <option value="schlecht">Schlecht</option>
-                <option value="sehr_schlecht">Sehr schlecht</option>
+                <option value="sehr schlecht">Sehr schlecht</option>
             </select><br>
             <label>Bemerkung</label>
-            <input type="password" name="password"><br>
+            <textarea id="bemerkung" name="bemerkung" rows="4" cols="50"></textarea><br>
             <input type="submit" value="Abschicken" name="submit">
         </form>
-        <strong style="color: red">{{$_SESSION['login_result_message']}}</strong>
+        <strong style="color: red">{{$_SESSION['error_message']}}</strong>
 
     </grid>
 
