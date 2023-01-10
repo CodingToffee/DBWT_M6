@@ -64,7 +64,7 @@ class HomeController
 
     function home(RequestData $rd) {
         if (!isset($_SESSION['login_ok']) || !$_SESSION['login_ok']) {
-
+            $_SESSION['target'] = '/home';
             header('Location: /anmeldung');
             return;
         }
@@ -106,7 +106,8 @@ class HomeController
         if ( $data != null) {
             $_SESSION['login_ok'] = true;
             $_SESSION['cookie'] = $data["name"];
-            header('Location: /home');
+            $target = $_SESSION['target'];
+            header('Location: ' . $target);
         } else {
             $_SESSION['login_result_message'] =
                 'Name oder Passwort falsch';
@@ -114,6 +115,16 @@ class HomeController
         }
     }
 
+    function bewertung() {
+        if (!isset($_SESSION['login_ok']) || !$_SESSION['login_ok']) {
+            $_SESSION['target'] = '/bewertung';
+            header('Location: /anmeldung');
+            return;
+        }
+        else {
+            return view('emensa.bewertung');
+        }
+    }
 
 
 }

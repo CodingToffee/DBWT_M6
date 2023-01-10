@@ -24,5 +24,6 @@ return array(
     '/newsletter' => 'HomeController@newsletter',
     '/home' => 'HomeController@home',
     '/anmeldung' => 'HomeController@anmeldung',
-    '/verifizierung' => 'HomeController@verifizierung'
+    '/verifizierung' => 'HomeController@verifizierung',
+    '/bewertung' => 'HomeController@bewertung'
 );
