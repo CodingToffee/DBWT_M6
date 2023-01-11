@@ -64,6 +64,11 @@ div p{
     width: 60%;
 }
 
+#bild_bewertung {
+    width: 50%;
+    height: 50%;
+}
+
 #zahlen{
     display: grid;
     grid-template-columns: auto auto auto;

@@ -9,6 +9,7 @@
  <meta charset="UTF-8">
  <title><?php echo $this->yieldContent("title"); ?></title>
  <link href="css/emensa.css" rel="stylesheet" />
+ <?php echo $this->yieldContent("head"); ?>
 </head>
 <body style="margin-bottom: 900px">
 <div class="frame border">

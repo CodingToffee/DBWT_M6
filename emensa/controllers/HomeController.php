@@ -124,7 +124,13 @@ class HomeController
             return;
         }
         else {
-            return view('emensa.bewertung');
+            $id = $_GET['gerichtid'];
+            $data = gericht_bewertung($id);
+            return view('emensa.bewertung',[
+                'gerichtid' => $id,
+                'name' => $data['name'],
+                'bildname' => $data['bildname']
+            ]);
         }
     }
 

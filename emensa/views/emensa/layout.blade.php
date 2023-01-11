@@ -9,6 +9,7 @@
     <meta charset="UTF-8">
     <title>@yield("title")</title>
     <link href="css/emensa.css" rel="stylesheet" />
+    @yield("head")
 </head>
 <body style="margin-bottom: 900px">
 <div class="frame border">

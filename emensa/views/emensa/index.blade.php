@@ -23,6 +23,7 @@
                 <th>Name</th>
                 <th>Preis intern</th>
                 <th>Preis extern</th>
+                <th>Image</th>
             </tr>
             @forelse($gerichte as $gericht)
                 <tr>
@@ -30,10 +31,14 @@
                         @if($gericht['code'] != "")
                             <span style="color: #D8000C">({{$gericht['code']}})</span>
                         @endif
-
+                        <a href="/bewertung?gerichtid={{$gericht['id']}}">Bewerten</a>
                     </td>
                     <td>{{$gericht['preis_intern']}}</td>
                     <td>{{$gericht['preis_extern']}}</td>
+                    <td width="100px" height="100px"><img width="100%" height="100%" src="/img/gerichte/@if($gericht['bildname'] != ""){{$gericht['bildname']}}
+        @else
+00_image_missing.jpg
+        @endif"></td>
                 </tr>
             @empty
                 keine gerichte in der Datenbank

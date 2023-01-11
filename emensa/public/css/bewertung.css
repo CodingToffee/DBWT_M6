@@ -1,0 +1,6 @@
+/* Media query styles for screens less than 600px */
+@media only screen and (max-width: 600px) {
+    form {
+        display: block;
+    }
+}

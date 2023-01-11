@@ -55,9 +55,10 @@ function zufaellige_gerichte(){
     try {
         $link = connectdb();
 
-        $sql = "SELECT name, 
+        $sql = "SELECT id ,name, 
                                preis_intern, 
-                               preis_extern, 
+                               preis_extern,
+                               bildname,
                                group_concat(code) as code
                                     from gericht
                              left join gericht_hat_allergen on gericht.id = gericht_hat_allergen.gericht_id
@@ -81,13 +82,14 @@ function zufaellige_gerichte(){
 
 }
 
-function codes_from_zufaellige_gerichte($data) {
+function codes_from_zufaellige_gerichte($data)
+{
 
     $codes = "";
-    foreach ($data as $gericht){
-        if($gericht['code'] != null){
-            if($codes != ""){
-                $codes.=',';
+    foreach ($data as $gericht) {
+        if ($gericht['code'] != null) {
+            if ($codes != "") {
+                $codes .= ',';
 
             }
             $codes .= $gericht['code'];
@@ -109,17 +111,34 @@ function codes_from_zufaellige_gerichte($data) {
         $data = mysqli_fetch_all($result, MYSQLI_BOTH);
 
         mysqli_close($link);
-    }
-    catch (Exception $ex) {
+    } catch (Exception $ex) {
         $data = array(
-            'id'=>'-1',
-            'error'=>true,
-            'name' => 'Datenbankfehler '.$ex->getCode(),
+            'id' => '-1',
+            'error' => true,
+            'name' => 'Datenbankfehler ' . $ex->getCode(),
             'beschreibung' => $ex->getMessage());
-    }
-    finally {
+    } finally {
         return $data;
     }
+}
 
+function gericht_bewertung($id) {
+        try {
+            $link = connectdb();
 
+            $sql = "SELECT name, bildname FROM gericht WHERE id = '$id'";
+            $result = mysqli_query($link, $sql);
+
+            $data = mysqli_fetch_all($result, MYSQLI_BOTH);
+
+            mysqli_close($link);
+        }
+        catch (Exception $ex) {
+            $data[0] = array(
+                'id'=>'-1',
+                'error'=>true,
+                'name' => 'Datenbankfehler '.$ex->getCode(),
+                'beschreibung' => $ex->getMessage());
+        }
+        return $data[0];
 }
