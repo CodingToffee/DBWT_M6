@@ -39,14 +39,16 @@
 
  </div>
 
- <h1 class="center">Wir freuen uns auf Ihren Besuch!</h1>
+
 
  <br>
  <br>
-
+ <br>
+ <br>
  <hr>
  <footer>
  <?php echo $this->yieldContent("footer"); ?>
+ <h1 class="center footer">Wir freuen uns auf Ihren Besuch!</h1>
  </footer>
 </div>
 

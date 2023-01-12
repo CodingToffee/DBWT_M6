@@ -28,8 +28,26 @@
             <textarea id="bemerkung" name="bemerkung" rows="4" cols="50"></textarea><br>
             <input type="submit" value="Abschicken" name="submit">
         </form>
-        <strong style="color: red">{{$_SESSION['error_message']}}</strong>
+        <strong style="color: red">{{$_SESSION['error_message']}}</strong><br>
 
+        <p><h2>Die Letzten 30 Bewertungen:</h2>
+        <table>
+            <tr class="heading">
+                <td>Gericht</td>
+                <td>Erfasst am</td>
+                <td>Bemerkung</td>
+                <td>Sternebewertung</td>
+            </tr>
+            @foreach($bewertungen as $bewertung)
+                <tr>
+                    <td>{{$bewertung['name']}}</td>
+                    <td>{{$bewertung['bewertungszeitpunkt']}}</td>
+                    <td>{{$bewertung['bemerkung']}}</td>
+                    <td>{{$bewertung['sternebewertung']}}</td>
+                </tr>
+            @endforeach
+        </table>
+        </p>
     </grid>
 
 @endsection

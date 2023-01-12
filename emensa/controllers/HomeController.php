@@ -125,11 +125,14 @@ class HomeController
         }
         else {
             $id = $_GET['gerichtid'];
+            $_SESSION['gerichtid'] = $id;
             $data = gericht_bewertung($id);
+            $bewertungen = letzte_30();
             return view('emensa.bewertung',[
                 'gerichtid' => $id,
                 'name' => $data['name'],
-                'bildname' => $data['bildname']
+                'bildname' => $data['bildname'],
+                'bewertungen' => $bewertungen
             ]);
         }
     }
@@ -144,7 +147,7 @@ class HomeController
             header('Location: /bewertung');
         }
         else {
-            safe_bewertung($sternebewertung,$bemerkung,$_SESSION['benutzer_id']);
+            safe_bewertung($sternebewertung,$bemerkung,$_SESSION['benutzer_id'],$_SESSION['gerichtid']);
             $gerichte = zufaellige_gerichte();
             $allerge_codes = codes_from_zufaellige_gerichte($gerichte);
 
@@ -162,6 +165,15 @@ class HomeController
                 'zahlen_besucher' => $zahlen_besucher
             ]);
         }
+    }
+
+    function meinebewertungen() {
+        $benutzer_id = $_SESSION['benutzer_id'];
+        echo $benutzer_id;
+        $data = bewertungen_benutzer($benutzer_id);
+        return view('emensa.meinebewertungen',[
+            'bewertungen' => $data
+        ]);
     }
 
 
