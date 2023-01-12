@@ -23,9 +23,11 @@ return array(
     '/emensa' => 'HomeController@emensa',
     '/newsletter' => 'HomeController@newsletter',
     '/home' => 'HomeController@home',
-    '/anmeldung' => 'HomeController@anmeldung',
-    '/verifizierung' => 'HomeController@verifizierung',
+    '/anmeldung' => 'AuthenticationController@anmeldung',
+    '/verifizierung' => 'AuthenticationController@verifizierung',
     '/bewertung' => 'HomeController@bewertung',
     '/bewertung_verarbeitung' => 'HomeController@bewertung_verarbeitung',
-    '/meinebewertungen' => 'HomeController@meinebewertungen'
+    '/meinebewertungen' => 'HomeController@meinebewertungen',
+    '/profile' => 'HomeController@profile',
+    '/abmelden' => 'AuthenticationController@abmelden'
 );

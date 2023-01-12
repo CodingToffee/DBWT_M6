@@ -6,4 +6,7 @@ function hash_baby($passwort)
     return sha1($passwort.$salt);
 }
 
-echo hash_baby("root");
+echo hash_baby("hallo");
+
+//pw admin: root
+//pw nico@gmail.com: hallo

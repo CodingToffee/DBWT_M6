@@ -31,4 +31,3 @@ function auth($passwort, $email)
     return $data[0];
 }
 
-

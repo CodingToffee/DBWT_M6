@@ -4,6 +4,7 @@ require_once($_SERVER['DOCUMENT_ROOT'].'/../models/zahlen.php');
 require_once($_SERVER['DOCUMENT_ROOT'].'/../models/newsletter.php');
 require_once($_SERVER['DOCUMENT_ROOT'].'/../models/authentification.php');
 require_once($_SERVER['DOCUMENT_ROOT'].'/../models/bewertung.php');
+require_once($_SERVER['DOCUMENT_ROOT'].'/../models/benutzer.php');
 
 /* Datei: controllers/HomeController.php */
 class HomeController
@@ -64,12 +65,14 @@ class HomeController
     }
 
     function home(RequestData $rd) {
+        /*
         if (!isset($_SESSION['login_ok']) || !$_SESSION['login_ok']) {
             $_SESSION['target'] = '/home';
             header('Location: /anmeldung');
             return;
         }
         else {
+        */
             $gerichte = zufaellige_gerichte();
             $allerge_codes = codes_from_zufaellige_gerichte($gerichte);
 
@@ -77,6 +80,9 @@ class HomeController
             $zahlen_anmeldungen = db_zahlen_anmeldungen();
             $zahlen_besucher = db_zahlen_besucher();
 
+        if(isset($_SESSION['login_ok']) && $_SESSION['login_ok']) {
+            $_SESSION["benutzer_name"] = benutzer_select($_SESSION['cookie'])['name'];
+        }
 
             return view('emensa.index', [
                 'rd' => $rd,
@@ -86,12 +92,13 @@ class HomeController
                 'zahlen_anmeldungen' => $zahlen_anmeldungen,
                 'zahlen_besucher' => $zahlen_besucher
             ]);
-        }
+
         /*
 
         */
     }
 
+    /*
     function anmeldung() {
         $msg = $_SESSION['login_result_message'] ?? null;
         return view('emensa.anmeldung_werbeseite', ['msg' => $msg]);
@@ -114,6 +121,16 @@ class HomeController
             $_SESSION['login_result_message'] =
                 'Name oder Passwort falsch';
             header('Location: /anmeldung');
+        }
+    }
+*/
+
+    public function profile(){
+
+        if(isset($_SESSION["cookie"])){
+            $benutzer = benutzer_select($_SESSION["cookie"]);
+
+            return view("emensa.profile", ['benutzer' => $benutzer]);
         }
     }
 
@@ -140,14 +157,14 @@ class HomeController
     function bewertung_verarbeitung(RequestData $rd) {
         $bemerkung = $rd->query['bemerkung'];
         $sternebewertung = $rd->query['sternebewertung'];
-        echo $_SESSION['benutzer_id'];
+        echo $_SESSION['cookie'];
         if (strlen($bemerkung) < 5) {
             $_SESSION['error_message'] =
                 'Die Bemerkung muss mindestens 5 Zeichen lang sein.';
             header('Location: /bewertung');
         }
         else {
-            safe_bewertung($sternebewertung,$bemerkung,$_SESSION['benutzer_id'],$_SESSION['gerichtid']);
+            safe_bewertung($sternebewertung,$bemerkung,$_SESSION['cookie'],$_SESSION['gerichtid']);
             $gerichte = zufaellige_gerichte();
             $allerge_codes = codes_from_zufaellige_gerichte($gerichte);
 
@@ -168,7 +185,7 @@ class HomeController
     }
 
     function meinebewertungen() {
-        $benutzer_id = $_SESSION['benutzer_id'];
+        $benutzer_id = $_SESSION['cookie'];
         echo $benutzer_id;
         $data = bewertungen_benutzer($benutzer_id);
         return view('emensa.meinebewertungen',[

@@ -17,20 +17,27 @@
 
     <div class="grid-oben">
         <div class="grid-oben-element border logo">
-            <img src="img/Logo_E-Mensa.PNG" alt="E-Mensa Logo" height="auto" width="100%">
+            <a href="/home"><img src="img/Logo_E-Mensa.PNG" alt="E-Mensa Logo" height="auto" width="100%"></a>
         </div>
         <div class="grid-oben-element border">
             <ul class="nav">
-                <li> <a href="#info">Ankündigung</a></li>
-                <li> <a href="#speisen">Speisen</a></li>
-                <li> <a href="#zahlen">Zahlen</a></li>
-                <li> <a href="#kontakt">Kontakt</a></li>
-                <li> <a href="#wichtig">Wichtig für uns</a></li>
+                <li> <a href="/home#info">Ankündigung</a></li>
+                <li> <a href="/home#speisen">Speisen</a></li>
+                <li> <a href="/home#zahlen">Zahlen</a></li>
+                <li> <a href="/home#kontakt">Kontakt</a></li>
+                <li> <a href="/home#wichtig">Wichtig für uns</a></li>
             </ul>
 
 
         </div>
-        <p style="position: absolute; right: 200px;">Angemeldet als {{$_SESSION["cookie"]}}</p>
+        <ul style="position: absolute; right: 10%; list-style-type: none">
+            @if(isset($_SESSION["cookie"]))
+                <li>Angemeldet als <a href="/profile" > {{$_SESSION["benutzer_name"]}}</a></li>
+                <li><a href="/abmelden" >Abmelden</a></li>
+            @else
+                <li><a href="/anmeldung" >Anmelden</a></li>
+            @endif
+        </ul>
 
     </div>
     <hr>
