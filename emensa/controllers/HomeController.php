@@ -65,14 +65,6 @@ class HomeController
     }
 
     function home(RequestData $rd) {
-        /*
-        if (!isset($_SESSION['login_ok']) || !$_SESSION['login_ok']) {
-            $_SESSION['target'] = '/home';
-            header('Location: /anmeldung');
-            return;
-        }
-        else {
-        */
             $gerichte = zufaellige_gerichte();
             $allerge_codes = codes_from_zufaellige_gerichte($gerichte);
 
@@ -97,33 +89,6 @@ class HomeController
 
         */
     }
-
-    /*
-    function anmeldung() {
-        $msg = $_SESSION['login_result_message'] ?? null;
-        return view('emensa.anmeldung_werbeseite', ['msg' => $msg]);
-    }
-
-    function verifizierung(RequestData $rd) {
-        $email = $rd->query['email'] ?? false;
-        $password = $rd->query['password'] ?? false;
-        // Überprüfung Eingabedaten
-
-        $data = auth($password,$email);
-        $_SESSION['login_result_message'] = "";
-        if ( $data != null) {
-            $_SESSION['login_ok'] = true;
-            $_SESSION['cookie'] = $data["name"];
-            $_SESSION['benutzer_id'] = $data['id'];
-            $target = $_SESSION['target'];
-            header('Location: ' . $target);
-        } else {
-            $_SESSION['login_result_message'] =
-                'Name oder Passwort falsch';
-            header('Location: /anmeldung');
-        }
-    }
-*/
 
     public function profile(){
 
@@ -193,5 +158,18 @@ class HomeController
         ]);
     }
 
+    function bewertungloeschen() {
+        $id = $_GET['gerichtid'];
+        echo $id;
+        bewertung_loeschen($id);
+        $data = gericht_bewertung($id);
+        $bewertungen = letzte_30();
+        return view('emensa.bewertung',[
+            'gerichtid' => $id,
+            'name' => $data['name'],
+            'bildname' => $data['bildname'],
+            'bewertungen' => $bewertungen
+        ]);
+    }
 
 }

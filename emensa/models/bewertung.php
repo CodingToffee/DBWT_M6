@@ -14,7 +14,7 @@ function safe_bewertung($sternebewertung, $bemerkung, $benutzer_id,$gericht_id) 
     function letzte_30() {
         $link = connectdb();
 
-        $sql = "SELECT bewertung.bewertungszeitpunkt, bewertung.bemerkung, bewertung.sternebewertung, gericht.name 
+        $sql = "SELECT bewertung.bewertungszeitpunkt, bewertung.bemerkung, bewertung.sternebewertung, bewertung.id, bewertung.benutzer_id, gericht.name 
                 FROM bewertung 
                 INNER JOIN gericht ON bewertung.gericht_id = gericht.id
                 ORDER BY bewertungszeitpunkt DESC 
@@ -42,4 +42,14 @@ function safe_bewertung($sternebewertung, $bemerkung, $benutzer_id,$gericht_id) 
         mysqli_close($link);
 
         return $data;
+    }
+
+    function bewertung_loeschen($id) {
+        $link = connectdb();
+
+        $sql = "DELETE FROM bewertung WHERE id = '$id'";
+
+        mysqli_query($link, $sql);
+
+        mysqli_close($link);
     }

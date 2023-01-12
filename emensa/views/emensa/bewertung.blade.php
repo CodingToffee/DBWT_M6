@@ -37,6 +37,7 @@
                 <td>Erfasst am</td>
                 <td>Bemerkung</td>
                 <td>Sternebewertung</td>
+                <td></td>
             </tr>
             @foreach($bewertungen as $bewertung)
                 <tr>
@@ -44,6 +45,8 @@
                     <td>{{$bewertung['bewertungszeitpunkt']}}</td>
                     <td>{{$bewertung['bemerkung']}}</td>
                     <td>{{$bewertung['sternebewertung']}}</td>
+                    <td>@if($bewertung['benutzer_id'] == $_SESSION['cookie'])
+                    <a href="/bewertungloeschen?gerichtid={{$bewertung['id']}}">Löschen</a>@endif</td>
                 </tr>
             @endforeach
         </table>

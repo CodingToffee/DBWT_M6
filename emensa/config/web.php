@@ -29,5 +29,6 @@ return array(
     '/bewertung_verarbeitung' => 'HomeController@bewertung_verarbeitung',
     '/meinebewertungen' => 'HomeController@meinebewertungen',
     '/profile' => 'HomeController@profile',
-    '/abmelden' => 'AuthenticationController@abmelden'
+    '/abmelden' => 'AuthenticationController@abmelden',
+    '/bewertungloeschen' => 'HomeController@bewertungloeschen'
 );
